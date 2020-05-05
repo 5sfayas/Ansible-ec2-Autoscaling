@@ -14,7 +14,9 @@
     gather_facts: no
     roles:
       - create_ami
+      - luanch_config
+      - lb
 
-  - hosts: old-ami-build
+  - hosts: template_ami
     roles:
       - terminate_instance
