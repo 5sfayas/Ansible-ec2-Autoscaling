@@ -12,8 +12,12 @@ vpc_id: xxxxxx
 pub_sub_az_1a: xxxxx
 pub_sub_az_1b: xxxxxxxx
 pub_sub_az_1c: xxxxxxxxxx
+az1: us-east-1a
+az2: us-east-1b
+az3: us-east-1c
 group_id: sg-abcd1234
 instance_type: t2.micro
+instance_name: template_ami
 volumes:
   - device_name: /dev/sda1
     device_type: gp2

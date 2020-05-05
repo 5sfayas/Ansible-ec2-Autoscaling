@@ -1,0 +1,38 @@
+---
+# tasks file for luanch_ec2_instance
+  - name: deploy ec2 instance to create ami template
+    ec2_ami_facts:
+      owners: 099720109477
+      filters:
+        name: "ubuntu/images/ubuntu-zesty-17.04-*"
+    register: ami_result
+
+  - name: launch an instances
+    ec2:
+      region: "{{ default_region }}"
+      keypair: "{{ key_name }}"
+      zone: "{{ az1 }}"
+      group: "{{ group_id }}"
+      image: "{{ ami_result.image_id }}"
+      instance_type: "{{ instance_type }}"
+      instance_tags:
+      Name: "{{ instance_name }}"
+      volumes: "{{ volumes }}"
+      wait: yes
+    register: ec2
+
+  - name: Add new instances to host group
+    add_host:
+      name: "{{ item.public_dns_name }}"
+      groups: "{{ instance_name }}"
+      ec2_id: "{{ item.id }}"
+    with_items: ec2.instances
+
+  - name: Wait for instance to boot
+    wait_for:
+      host: "{{ item.public_dns_name }}"
+      port: 22
+      delay: 30
+      timeout: 300
+      state: started
+    with_items: ec2.instances
