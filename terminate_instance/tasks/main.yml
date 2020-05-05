@@ -1,0 +1,8 @@
+---
+# tasks file for terminate_instance
+- name: Terminate old instance(s)
+  ec2:
+    instance_ids: "{{ ec2_id }}"
+    region: "{{ default_region }}"
+    state: absent
+    wait: yes
