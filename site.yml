@@ -8,3 +8,13 @@
   - hosts: template_ami
     roles:
       - nginx
+
+  - hosts: control
+    connection: local
+    gather_facts: no
+    roles:
+      - create_ami
+
+  - hosts: old-ami-build
+    roles:
+      - terminate_instance
