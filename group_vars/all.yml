@@ -12,5 +12,4 @@ vpc_id: xxxxxx
 pub_sub_az_1a: xxxxx
 pub_sub_az_1b: xxxxxxxx
 pub_sub_az_1c: xxxxxxxxxx
-IG_Gateway_id: xxxxxxxxxxx
 group_id: sg-abcd1234
