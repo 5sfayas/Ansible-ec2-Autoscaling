@@ -16,6 +16,7 @@
       - create_ami
       - luanch_config
       - lb
+      - asg
 
   - hosts: template_ami
     roles:
